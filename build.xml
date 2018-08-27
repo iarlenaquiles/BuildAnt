@@ -7,7 +7,7 @@
                    
      iarlenaquiles                                                                
      ====================================================================== -->
-<project name="project" default="default">
+<project name="project" default="clean">
 	<description>
             Hello World
     </description>
@@ -29,21 +29,21 @@
 			</manifest>
 		</jar>
 	</target>
-	
+
 	<target name="run">
 		<java jar="build/jar/HelloWorld.jar" fork="true" />
 	</target>
-	<!-- ================================= 
-          target: default              
-         ================================= -->
-	<target name="default" depends="depends" description="description">
 
+	<target name="sign">
+		<mkdir dir="signed"/>
+		<signjar destDir="signed" alias="server" keystore="IarlenAquiles.jks" storepass="bombaufc123">
+			<path>
+				<fileset dir="build/jar/" includes="*.jar" />
+			</path>
+			<flattenmapper />
+		</signjar>
 	</target>
 
-	<!-- - - - - - - - - - - - - - - - - - 
-          target: depends                      
-         - - - - - - - - - - - - - - - - - -->
-	<target name="depends">
-	</target>
-
+	<!-- keytool -genkey -alias server -keyalg RSA -keysize 2048 -keystore IarlenAquiles.jks -dname "CN=IarlenAquiles,OU=Desenvolvimento, O=Aquiles tecnologia, L=Quixadá, ST=Ce, C=BR" && keytool -certreq -alias server -file IarlenAquiles.csr -keystore IarlenAquiles.jks -->
+	
 </project>
