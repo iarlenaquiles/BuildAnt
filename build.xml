@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     27 de ago de 2018 16:07:49                                                        
+
+     project    
+     description
+                   
+     iarlenaquiles                                                                
+     ====================================================================== -->
+<project name="project" default="default">
+	<description>
+            Hello World
+    </description>
+
+	<target name="clean">
+		<delete dir="build" />
+	</target>
+
+	<target name="compile">
+		<mkdir dir="build/classes" />
+		<javac srcdir="src" destdir="build/classes" />
+	</target>
+
+	<target name="jar">
+		<mkdir dir="build/jar" />
+		<jar destfile="build/jar/HelloWorld.jar" basedir="build/classes">
+			<manifest>
+				<attribute name="Main-Class" value="com.br.helloworld.Main" />
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name="run">
+		<java jar="build/jar/HelloWorld.jar" fork="true" />
+	</target>
+	<!-- ================================= 
+          target: default              
+         ================================= -->
+	<target name="default" depends="depends" description="description">
+
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: depends                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="depends">
+	</target>
+
+</project>
